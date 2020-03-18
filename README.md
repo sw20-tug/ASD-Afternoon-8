@@ -2,14 +2,20 @@
 
 This is the repository for the team *ASD: Afternoon 8*
 
-You can import in IntelliJ and build there.
+
+
+We use Spring Boot with Maven
+
+
+Run following command in complete directory:
+./mvnw spring-boot:run
 
 
 
-Maven:
-in complete folder:
-  ./mvnw spring-boot:run
+now run this in curl in a separate terminal window:
+
+curl localhost:8080
 
 
-  run with
-  curl localhost:8080
+
+
