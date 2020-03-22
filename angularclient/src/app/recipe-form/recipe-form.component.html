@@ -1,0 +1,68 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="recipe.type"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required #type="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">description is required</div>
+      <div class="form-group">
+        <label for="description">description</label>
+        <input type="text" [(ngModel)]="recipe.description"
+          class="form-control"
+          id="description"
+          name="description"
+          placeholder="Enter your email address"
+          required #email="ngModel">
+        <div [hidden]="!description.pristine" class="alert alert-danger">Email is required</div>
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" [(ngModel)]="recipe.type"
+          class="form-control"
+          id="type"
+          name="type"
+          placeholder="Enter type"
+          required #type="ngModel">
+        <div [hidden]="!type.pristine" class="alert alert-danger">type is required</div>
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" [(ngModel)]="recipe.preparationtime"
+          class="form-control"
+          id="preparationtime"
+          name="preparationtime"
+          placeholder="Enter preparationtime"
+          required #type="ngModel">
+        <div [hidden]="!preparationtime.pristine" class="alert alert-danger">preparationtime is required</div>
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" [(ngModel)]="recipe.cookingtime"
+          class="form-control"
+          id="cookingtime"
+          name="cookingtime"
+          placeholder="Enter cookingtime"
+          required #type="ngModel">
+        <div [hidden]="!cookingtime.pristine" class="alert alert-danger">cookingtime is required</div>
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" [(ngModel)]="recipe.content"
+          class="form-control"
+          id="content"
+          name="content"
+          placeholder="Enter content"
+          required #type="ngModel">
+        <div [hidden]="!content.pristine" class="alert alert-danger">content is required</div>
+      </div>
+      <button type="submit" [disabled]="!recipeForm.form.valid"
+        class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">type</th>
+          <th scope="col">preparationtime</th>
+          <th scope="col">cookingtime</th>
+          <th scope="col">content</th>
+          <th scope="col">difficulty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ recipe.id }}</td>
+          <td>{{ recipe.title }}</td>
+          <td>{{ recipe.description }}</td>
+          <td>{{ recipe.type }}</td>
+          <td>{{ recipe.preparationtime }}</td>
+          <td>{{ recipe.cookingtime }}</td>
+          <td>{{ recipe.content }}</td>
+          <td>{{ recipe.difficulty }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
