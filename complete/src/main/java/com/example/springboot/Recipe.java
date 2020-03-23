@@ -10,23 +10,23 @@ public class Recipe {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
-	@NotBlank
+	//@NotBlank
 	private String title;
 
 	//@Column(columnDefinition = "TEXT")
-	@NotBlank
+	//@NotBlank
 	private String description;
 
-	@NotBlank
+	//@NotBlank
 	private String type;
 
-	@NotNull
+	//@NotNull
 	private Integer preparationtime;
 
-	@NotNull
+	//@NotNull
 	private Integer cookingtime;
 
-	@NotBlank
+	//@NotBlank
 	@Column(columnDefinition = "TEXT")
 	private String content;
 
