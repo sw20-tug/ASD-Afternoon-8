@@ -8,7 +8,7 @@ We use Spring Boot with Maven
 
 
 Run following command in complete directory:
-./mvnw spring-boot:run
+./mvnw spring-boot:run/Users/floriangamillscheg/Downloads/description_Ass1_D1.md
 
 
 
