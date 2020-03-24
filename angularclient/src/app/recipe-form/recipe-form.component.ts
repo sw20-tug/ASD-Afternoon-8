@@ -26,6 +26,6 @@ export class RecipeFormComponent {
  }
 
  gotoUserList() {
-   this.router.navigate(['/recipes']);
+   this.router.navigate(['/demo/all']);
  }
 }

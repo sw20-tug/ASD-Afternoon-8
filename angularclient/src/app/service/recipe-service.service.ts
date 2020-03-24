@@ -9,7 +9,7 @@ export class RecipeService {
   private usersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.usersUrl = 'http://localhost:8080/demo/recipes';
+    this.usersUrl = 'http://localhost:8080/demo/';
   }
 
   public findAll(): Observable<Recipe[]> {
