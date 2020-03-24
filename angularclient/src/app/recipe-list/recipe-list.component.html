@@ -4,8 +4,8 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Description</th>
+          <th scope="col">title</th>
+          <th scope="col">description</th>
           <th scope="col">type</th>
           <th scope="col">preparationtime</th>
           <th scope="col">cookingtime</th>
@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let recipe of recipes">
           <td>{{ recipe.id }}</td>
           <td>{{ recipe.title }}</td>
           <td>{{ recipe.description }}</td>
@@ -22,7 +22,6 @@
           <td>{{ recipe.preparationtime }}</td>
           <td>{{ recipe.cookingtime }}</td>
           <td>{{ recipe.content }}</td>
-          <td>{{ recipe.difficulty }}</td>
         </tr>
       </tbody>
     </table>
