@@ -24,4 +24,9 @@ public class MainController {
     public List<Recipe> getRecipes() {
         return (List<Recipe>) recipeRepository.findAll();
     }
+
+    @DeleteMapping("/recipes/delete/{id}")
+    public void deleteRecipe(@PathVariable int id){
+        recipeRepository.deleteById(id);
+    }
 }

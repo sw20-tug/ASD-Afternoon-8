@@ -22,6 +22,8 @@
           <td>{{ recipe.preparationtime }}</td>
           <td>{{ recipe.cookingtime }}</td>
           <td>{{ recipe.content }}</td>
+          <td></td>
+          <td><button class="button deleteButton" (click)="deleteRecipe(recipe.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
