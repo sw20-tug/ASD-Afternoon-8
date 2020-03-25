@@ -13,3 +13,14 @@
   }
 
   .deleteButton {background-color: #f44336;} /* Red */ 
+
+  .example-card {
+    max-width: 370px;
+    float: right;
+  }
+  
+  .example-header-image {
+    background-image: url('https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit');
+    background-size: cover;
+  }
+  

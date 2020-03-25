@@ -1,31 +1,22 @@
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">title</th>
-          <th scope="col">description</th>
-          <th scope="col">type</th>
-          <th scope="col">preparationtime</th>
-          <th scope="col">cookingtime</th>
-          <th scope="col">content</th>
-          <th scope="col">difficulty</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let recipe of recipes">
-          <td>{{ recipe.id }}</td>
-          <td>{{ recipe.title }}</td>
-          <td>{{ recipe.description }}</td>
-          <td>{{ recipe.type }}</td>
-          <td>{{ recipe.preparationtime }}</td>
-          <td>{{ recipe.cookingtime }}</td>
-          <td>{{ recipe.content }}</td>
-          <td></td>
-          <td><button class="button deleteButton" (click)="deleteRecipe(recipe.id)">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+
+
+<mat-grid-list cols="3" rowHeight="1:1.5">
+  <mat-grid-tile *ngFor="let recipe of recipes">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ recipe.title }}</mat-card-title>
+        <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          <b>Preparation time:</b>{{recipe.preparationtime}}<br>
+          <b>Cooking time:</b>{{recipe.cookingtime}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  
+</mat-grid-list>
+
