@@ -1,0 +1,26 @@
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .deleteButton {background-color: #f44336;} /* Red */ 
+
+  .example-card {
+    max-width: 370px;
+    float: right;
+  }
+  
+  .example-header-image {
+    background-image: url('https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit');
+    background-size: cover;
+  }
+  

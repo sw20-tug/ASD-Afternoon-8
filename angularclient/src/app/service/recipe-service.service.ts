@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class RecipeService {
 
+ 
   private usersUrl: string;
 
   constructor(private http: HttpClient) {
@@ -19,4 +20,9 @@ export class RecipeService {
   public save(recipe: Recipe) {
     return this.http.post<Recipe>(this.usersUrl, recipe);
   }
+
+  public deleteById(id: any): Observable<{}> {
+    return this.http.delete(this.usersUrl + "/delete/" + id.toString());
+  }
+
 }
