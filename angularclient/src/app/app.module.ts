@@ -10,6 +10,9 @@ import { RecipeService } from './service/recipe-service.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 
 
@@ -18,7 +21,8 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
     AppComponent,
     RecipeListComponent,
     RecipeFormComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,
