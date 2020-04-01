@@ -13,7 +13,8 @@ export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
 
   constructor(private recipeService: RecipeService,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.recipeService.findAll().subscribe(data => {
@@ -21,11 +22,21 @@ export class RecipeListComponent implements OnInit {
     });
   }
 
+  save(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+     this.recipeService.updateRecipe(id, this.recipes)
+       .subscribe(() => this.gotoUserList());
+   }
+
+   gotoUserList() {
+     this.router.navigate(['/recipelist']);
+   }
+
   deleteRecipe(id): void{
     this.recipeService.deleteById(id).subscribe(response =>{
       console.log("Delete record #" + id);
       window.location.reload();
     });
-    
+
   }
 }

@@ -1,5 +1,5 @@
 package com.example.springboot;
-
+import com.example.springboot.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +24,34 @@ public class MainController {
 
        return recipe_list;
 
+    }
+
+    @GetMapping("/recipes/edit/{id}")
+    public Recipe getRecipe(@PathVariable int id) {
+        System.out.println("komme da rein List huhu");
+        return recipeRepository.findById(id).orElse(null);
+
+    }
+
+    @PutMapping("/recipes/edit/{id}")
+    void updateRecipe(@PathVariable int id, @RequestBody Recipe recipe ) {
+        System.out.println("komme da rein update");
+        Recipe recipe_ = recipeRepository.findById(id).get();
+        recipe_.setTitle(recipe.getTitle());
+        recipe_.setDescription(recipe.getDescription());
+        recipe_.setType(recipe.getType());
+        recipe_.setPreparationtime(recipe.getPreparationtime());
+        recipe_.setCookingtimeime(recipe.getCookingtime());
+        recipe_.setContent(recipe.getContent());
+
+        System.out.println("komme da rein update");
+        System.out.println("komme da rein update " + recipe.getTitle());
+        System.out.println("komme da rein update" + recipe.getType());
+        System.out.println("komme da rein update" + recipe.getDescription());
+
+
+        System.out.println("komme da rein Add");
+        recipeRepository.save(recipe_);
     }
 
     @PostMapping("/recipes")

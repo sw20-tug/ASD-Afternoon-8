@@ -9,6 +9,7 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeService } from './service/recipe-service.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 
 
 
@@ -16,7 +17,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
   declarations: [
     AppComponent,
     RecipeListComponent,
-    RecipeFormComponent
+    RecipeFormComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
