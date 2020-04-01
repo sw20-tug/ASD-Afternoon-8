@@ -18,9 +18,14 @@
       <mat-card-actions>
           <button [routerLink]="['/editrecipe', recipe.id]">edit</button>
 
+
           <app-confirm-dialog></app-confirm-dialog>
             <button class="btn btn-primary pull-right" (click)="deleteRecipe(recipe.id)">Delete</button>
         </mat-card-actions>
+
+          <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>
+  </mat-card-actions>
+
     </mat-card>
   </mat-grid-tile>
 

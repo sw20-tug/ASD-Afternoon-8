@@ -3,7 +3,15 @@ import { Recipe } from '../model/recipe';
 import { RecipeService } from '../service/recipe-service.service';
 import { ConfirmDialogService } from '../service/recipe-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import {  ConfirmDialogModule } from '../app.module';
+
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+
 
 @Component({
   selector: 'app-recipe-list',
@@ -17,8 +25,17 @@ export class RecipeListComponent implements OnInit {
 
   constructor(public recipeService: RecipeService,
               private router: Router,
+
               private confirmDialogService: ConfirmDialogService,
               private route: ActivatedRoute) { }
+
+              private route: ActivatedRoute,
+          /*  iconRegistry: MatIconRegistry, sanitizer: DomSanitizer*/) {
+        /*      iconRegistry.addSvgIcon(
+        'thumbs-up',
+        sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/thumbup-icon.svg'));*/ }
+
+
 
   ngOnInit() {
     this.recipeService.findAll().subscribe(data => {

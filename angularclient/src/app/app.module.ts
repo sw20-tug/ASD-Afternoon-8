@@ -10,8 +10,15 @@ import { RecipeService } from './service/recipe-service.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './service/recipe-service.service';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+
+
 
 
 @NgModule({
@@ -20,7 +27,10 @@ import {ConfirmDialogService} from './service/recipe-service.service';
     RecipeListComponent,
     RecipeFormComponent,
     RecipeEditComponent,
+
     ConfirmDialogComponent
+
+    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,

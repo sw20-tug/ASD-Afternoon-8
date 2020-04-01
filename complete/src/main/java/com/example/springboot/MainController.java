@@ -43,6 +43,7 @@ public class MainController {
         recipe_.setPreparationtime(recipe.getPreparationtime());
         recipe_.setCookingtimeime(recipe.getCookingtime());
         recipe_.setContent(recipe.getContent());
+        recipe_.setDifficulty(recipe.getDifficulty());
 
         System.out.println("komme da rein update");
         System.out.println("komme da rein update " + recipe.getTitle());
