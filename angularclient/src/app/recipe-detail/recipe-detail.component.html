@@ -1,0 +1,45 @@
+<div *ngIf="recipe">
+  <h2>{{recipe.title}} Detail view  </h2>
+    <figure>
+      <p>
+        <img src="https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit" alt="picture" align="right" width="480" height="270">
+          <figcaption> Rezept({{recipe.id}}): {{recipe.title}}</figcaption>
+      </figure>
+    <div>
+  <label><b>description:</b></label>
+  <div>
+    <input type="text"[(ngModel)]="recipe.description" readonly><br><br>
+  </div>
+    </div>
+<div>
+  <label><b>type:</b></label>
+    <div>
+      <input type="text"[(ngModel)]="recipe.type" readonly><br><br>
+  </div>
+</div>
+<div>
+  <label><b>preparation time:</b></label>
+    <div>
+      <input type="text"[(ngModel)]="recipe.preparationtime" readonly><br><br>
+   </div>
+</div>
+<div>
+<label><b>cooking time:</b></label>
+  <div>
+    <input type="text"[(ngModel)]="recipe.cookingtime" readonly><br><br>
+  </div>
+</div>
+<div>
+<label><b>content:</b></label>
+  <div>
+   <textarea [(ngModel)]="recipe.content" placeholder="content" rows="4" cols="50" readonly></textarea>
+  </div>
+</div>
+<div>
+<label><b>difficulty:</b></label>
+  <div>
+   <input [(ngModel)]="recipe.difficulty" placeholder="difficulty"readonly><br><br>
+  </div>
+</div>
+<button class="goback" (click)="goBack()">go back</button>
+</div>
