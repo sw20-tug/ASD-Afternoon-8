@@ -1,0 +1,41 @@
+<div *ngIf="recipe">
+  <h2>{{recipe.title}} Details</h2>
+  <div><span>id: </span>{{recipe.id}}</div>
+  <div>
+    <label>title:
+      <input [(ngModel)]="recipe.title" placeholder="title"/>
+    </label>
+  </div>
+  <div>
+    <label>description:
+      <input [(ngModel)]="recipe.description" placeholder="description"/>
+    </label>
+  </div>
+  <div>
+    <label>type:
+      <input [(ngModel)]="recipe.type" placeholder="type"/>
+    </label>
+  </div>
+  <div>
+    <label>preparationtime:
+      <input [(ngModel)]="recipe.preparationtime" placeholder="preparationtime"/>
+    </label>
+  </div>
+  <div>
+    <label>cookingtime:
+      <input [(ngModel)]="recipe.cookingtime" placeholder="cookingtime"/>
+    </label>
+  </div>
+  <div>
+    <label>content:
+       <textarea [(ngModel)]="recipe.content" placeholder="content" rows="4" cols="50"></textarea>
+    </label>
+  </div>
+  <div>
+    <label>difficulty:
+      <input [(ngModel)]="recipe.difficulty" placeholder="difficulty"/>
+    </label>
+  </div>
+  <button class="goback" (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div>

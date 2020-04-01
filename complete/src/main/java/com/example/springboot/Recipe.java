@@ -6,6 +6,22 @@ import  javax.validation.constraints.NotNull;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Recipe {
+
+	public Recipe(){
+
+	}
+
+	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty){
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.type = type;
+		this.preparationtime = preparationtime;
+		this.cookingtime = cookingtime;
+		this.content = content;
+		this.difficulty = difficulty;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
