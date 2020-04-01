@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../model/recipe';
 import { RecipeService } from '../service/recipe-service.service';
+import { ConfirmDialogService } from '../service/recipe-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {  ConfirmDialogModule } from '../app.module';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,9 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RecipeListComponent implements OnInit {
 
   recipes: Recipe[];
+  delete: Number;
 
-  constructor(private recipeService: RecipeService,
+  constructor(public recipeService: RecipeService,
               private router: Router,
+              private confirmDialogService: ConfirmDialogService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -32,11 +36,17 @@ export class RecipeListComponent implements OnInit {
      this.router.navigate(['/recipelist']);
    }
 
-  deleteRecipe(id): void{
-    this.recipeService.deleteById(id).subscribe(response =>{
-      console.log("Delete record #" + id);
+  deleteRecipe(id): void {
+    // alert(this.delete);
+    this.confirmDialogService.confirmThis('Are you sure to delete?', function () {
+        this.recipeService.deleteById(id).subscribe(response => {
+      console.log('Delete record #' + id);
       window.location.reload();
     });
+    }, function () {
+        // this.delete = 1;
+    });
+    // alert(this.delete);
 
   }
 }

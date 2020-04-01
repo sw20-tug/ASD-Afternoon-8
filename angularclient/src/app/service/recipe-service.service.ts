@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Recipe } from '../model/recipe';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
+// import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
@@ -42,12 +44,47 @@ export class RecipeService {
 }
 
   public deleteById(id: any): Observable<{}> {
-    return this.http.delete(this.usersUrl + "/delete/" + id.toString());
+    return this.http.delete(this.usersUrl + '/delete/' + id.toString());
   }
 
   updateRecipe (id: number, recipe: any): Observable<any > {
       const url = `${this.usersUrl}/edit/${id}`;
-    return this.http.put(url ,recipe);
+    return this.http.put(url , recipe);
+  }
+
+}
+
+
+export class ConfirmDialogService {
+
+  private subject = new Subject<any>();
+  constructor() { }
+
+  confirmThis(message: string, siFn: () => void, noFn: () => void) {
+      this.setConfirmation(message, siFn, noFn);
+  }
+
+  setConfirmation(message: string, siFn: () => void, noFn: () => void) {
+      // tslint:disable-next-line: prefer-const
+      let that = this;
+      this.subject.next({
+          type: 'confirm',
+          text: message,
+          siFn:
+              function () {
+                  that.subject.next(); // this will close the modal
+                  siFn();
+              },
+          noFn: function () {
+              that.subject.next();
+              noFn();
+          }
+      });
+
+  }
+
+  getMessage(): Observable<any> {
+      return this.subject.asObservable();
   }
 
 }
