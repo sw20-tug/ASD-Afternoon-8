@@ -1,5 +1,6 @@
 package com.example.springboot;
 import com.example.springboot.Recipe;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,25 @@ public class MainController {
         recipeRepository.save(recipe_);
     }
 
+    @PutMapping("/recipes/favorize/{id}")
+    void favorize(@PathVariable int id, @RequestBody Bool favorite) {
+        System.out.println("komme da rein update");
+        Recipe recipe_ = recipeRepository.findById(id).get();
+        recipe_.setFavorite(favorite);
+        System.out.println("komme da rein updateTitle");
+        recipeRepository.save(recipe_);
+    }
+
+    @GetMapping("/recipes/favorites")
+    public List<Recipe>  listFavorites() {
+        System.out.println("komme da rein List");
+        List<Recipe> recipe_list = (List<Recipe>) recipeRepository.findByFavorite(true);
+        if(recipe_list.isEmpty())
+            System.out.println("Ist leer");
+
+        return recipe_list;
+
+    }
 
     @PostMapping("/recipes")
     void addUser(@RequestBody Recipe recipe) {
