@@ -22,7 +22,9 @@
       <mat-card-actions>
           <button [routerLink]="['/editrecipe', recipe.id]">edit</button>&nbsp;
           <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>&nbsp;
-           <button class="w3-large" (click)="clickMethod(recipe.id)"><i class="fa fa-trash"  ></i> Delete</button>
+          <button  class="btn btn-danger" (click)="clickMethod(recipe.id)" aria-label="Delete">
+  <i class="fa fa-trash-o" aria-hidden="true"></i>
+</button>
   </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
