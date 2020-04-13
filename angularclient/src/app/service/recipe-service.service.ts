@@ -12,16 +12,15 @@ export class RecipeService {
 
   private usersUrl: string;
 
-  httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
+  private headers = new Headers({'Content-Type': 'application/json'});
+
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/demo/recipes';
   }
-  //public get(id: string) {
+public get(id: string) {
     //return this.http.get<Recipe>(this.usersUrl);
-//  }
+  }
 
   public findAll(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(this.usersUrl);
@@ -43,48 +42,52 @@ export class RecipeService {
   }
 }
 
-  public deleteById(id: any): Observable<{}> {
-    return this.http.delete(this.usersUrl + '/delete/' + id.toString());
+  public deleteById(id: number): Observable<any>  {
+      const url = `${this.usersUrl}/delete/${id}`;
+    return this.http.delete(url);
   }
 
   updateRecipe (id: number, recipe: any): Observable<any > {
       const url = `${this.usersUrl}/edit/${id}`;
     return this.http.put(url , recipe);
   }
+  updateTitle (id: number, title: string): Observable<any > {
+    const url = `${this.usersUrl}/updateTitle/${id}`;
 
+    return this.http.put(url, title);
+  }
 }
 
+  export class ConfirmDialogService {
 
-export class ConfirmDialogService {
+   private subject = new Subject<any>();
+   constructor() { }
 
-  private subject = new Subject<any>();
-  constructor() { }
+   confirmThis(message: string, siFn: () => void, noFn: () => void) {
+       this.setConfirmation(message, siFn, noFn);
+   }
 
-  confirmThis(message: string, siFn: () => void, noFn: () => void) {
-      this.setConfirmation(message, siFn, noFn);
-  }
+   setConfirmation(message: string, siFn: () => void, noFn: () => void) {
+       // tslint:disable-next-line: prefer-const
+       let that = this;
+       this.subject.next({
+           type: 'confirm',
+           text: message,
+           siFn:
+               function () {
+                   that.subject.next(); // this will close the modal
+                   siFn();
+               },
+           noFn: function () {
+               that.subject.next();
+               noFn();
+           }
+       });
 
-  setConfirmation(message: string, siFn: () => void, noFn: () => void) {
-      // tslint:disable-next-line: prefer-const
-      let that = this;
-      this.subject.next({
-          type: 'confirm',
-          text: message,
-          siFn:
-              function () {
-                  that.subject.next(); // this will close the modal
-                  siFn();
-              },
-          noFn: function () {
-              that.subject.next();
-              noFn();
-          }
-      });
+   }
 
-  }
-
-  getMessage(): Observable<any> {
-      return this.subject.asObservable();
-  }
+   getMessage(): Observable<any> {
+       return this.subject.asObservable();
+   }
 
 }
