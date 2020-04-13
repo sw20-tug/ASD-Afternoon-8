@@ -1,11 +1,15 @@
-
-
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+    <h1>All recipes</h1>
 <mat-grid-list cols="3" rowHeight="1:1.5">
   <mat-grid-tile *ngFor="let recipe of recipes">
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title><input [(ngModel)]="recipe.title" placeholder="preparationtime"/> <button (click)="save()">save</button></mat-card-title>
+        <mat-card-title><input [(ngModel)]="recipe.title" placeholder="preparationtime"/> <button (click)="save(recipe.id, recipe.title)">save</button></mat-card-title>
         <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image src="https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit" alt="Photo of a Shiba Inu">
@@ -16,17 +20,13 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-          <button [routerLink]="['/editrecipe', recipe.id]">edit</button>
-
-
-          <app-confirm-dialog></app-confirm-dialog>
-            <button class="btn btn-primary pull-right" (click)="deleteRecipe(recipe.id)">Delete</button>
-        </mat-card-actions>
-
-          <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>
+          <button [routerLink]="['/editrecipe', recipe.id]">edit</button>&nbsp;
+          <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>&nbsp;
+           <button class="w3-large" (click)="clickMethod(recipe.id)"><i class="fa fa-trash"  ></i> Delete</button>
   </mat-card-actions>
-
     </mat-card>
   </mat-grid-tile>
 
 </mat-grid-list>
+</body>
+</html>

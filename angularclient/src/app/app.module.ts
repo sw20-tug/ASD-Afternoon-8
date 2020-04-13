@@ -10,14 +10,11 @@ import { RecipeService } from './service/recipe-service.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
-
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import {ConfirmDialogService} from './service/recipe-service.service';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
-
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogService} from './service/recipe-service.service';
 
 
 
@@ -27,10 +24,8 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
     RecipeListComponent,
     RecipeFormComponent,
     RecipeEditComponent,
-
+    RecipeDetailComponent,
     ConfirmDialogComponent
-
-    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,11 +35,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
     MatCardModule,
     MatGridListModule
   ],
-  exports: [
-    ConfirmDialogComponent
-  ],
-  providers: [RecipeService, ConfirmDialogService],
+  providers: [RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-export class ConfirmDialogModule { }

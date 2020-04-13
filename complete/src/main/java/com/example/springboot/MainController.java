@@ -54,6 +54,15 @@ public class MainController {
         System.out.println("komme da rein Add");
         recipeRepository.save(recipe_);
     }
+    @PutMapping("/recipes/updateTitle/{id}")
+    void updateTitle(@PathVariable int id, @RequestBody String huhu ) {
+        System.out.println("komme da rein update");
+        Recipe recipe_ = recipeRepository.findById(id).get();
+        recipe_.setTitle(huhu);
+        System.out.println("komme da rein updateTitle");
+        recipeRepository.save(recipe_);
+    }
+
 
     @PostMapping("/recipes")
     void addUser(@RequestBody Recipe recipe) {
@@ -63,6 +72,7 @@ public class MainController {
 
     @DeleteMapping("/recipes/delete/{id}")
     public void deleteRecipe(@PathVariable int id){
+        System.out.println("komme da rein delete");
         recipeRepository.deleteById(id);
     }
 }
