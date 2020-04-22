@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 <body>
     <h1>All recipes</h1>
 <mat-grid-list cols="3" rowHeight="1:1.5">
@@ -22,6 +23,7 @@
       <mat-card-actions>
           <button [routerLink]="['/editrecipe', recipe.id]">edit</button>&nbsp;
           <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>&nbsp;
+        <button  class="glyphicon glyphicon-star"   aria-label="Favourite" ></button>
           <button  class="btn btn-danger" (click)="clickMethod(recipe.id)" aria-label="Delete">
   <i class="fa fa-trash-o" aria-hidden="true"></i>
 </button>
