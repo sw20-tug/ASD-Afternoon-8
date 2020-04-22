@@ -1,10 +1,12 @@
 package com.example.springboot;
 import com.example.springboot.Recipe;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -73,6 +75,46 @@ public class MainController {
         recipeRepository.save(recipe_);
     }
 
+   @GetMapping("/recipes/search/{title}")
+    public List<Recipe>  Search_2(@PathVariable String title ) {
+        System.out.println("komme da rein search");
+        List<Recipe> recipe_list =  new ArrayList<Recipe>();;
+        //int i = Integer.parseInt(title);
+           if(recipeRepository.existsRecipeByTitle(title))
+           {
+           System.out.println("gefunden" + title);
+
+           recipe_list.addAll(recipeRepository.findByTitle(title)) ;
+       }
+       if(recipeRepository.existsRecipeByType(title))
+       {
+           System.out.println("gefunden 2" + title);
+
+           recipe_list.addAll(recipeRepository.findByType(title)) ;
+       }
+
+       if(NumberUtils.isCreatable(title)) {
+           int prep_cooktime = Integer.parseInt(title);
+
+           if (recipeRepository.existsRecipeByPreparationtime(prep_cooktime)) {
+               System.out.println("gefunden 2" + title);
+
+               recipe_list.addAll(recipeRepository.findByPreparationtime(prep_cooktime));
+           }
+           if (recipeRepository.existsRecipeByCookingtime(prep_cooktime)) {
+               System.out.println("gefunden 2" + prep_cooktime);
+
+               recipe_list.addAll(recipeRepository.findByCookingtime(prep_cooktime));
+           }
+       }
+
+
+        if(recipe_list.isEmpty())
+            System.out.println("Ist leer");
+
+        return recipe_list;
+
+    }
     @GetMapping("/recipes/favorites")
     public List<Recipe>  listFavorites() {
         System.out.println("komme da rein List");

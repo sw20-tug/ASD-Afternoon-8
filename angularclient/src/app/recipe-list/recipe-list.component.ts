@@ -57,10 +57,22 @@ export class RecipeListComponent implements OnInit {
           .subscribe(() => this.gotoUserList());
    }
 
+   search(search: string): void {
+      this.recipeService.findSearch(search)
+           .subscribe(data => {
+             this.recipes = data;
+           });
+    }
+
+
 
 
    gotoUserList() {
      this.router.navigate(['/recipelist']);
+   }
+
+   gotoFavoritesList() {
+     this.router.navigate(['/favorites']);
    }
 
    refresh() {
