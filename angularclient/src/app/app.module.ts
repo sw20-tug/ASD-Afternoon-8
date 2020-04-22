@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './service/recipe-service.service';
+import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 
 
 
@@ -25,7 +26,8 @@ import {ConfirmDialogService} from './service/recipe-service.service';
     RecipeFormComponent,
     RecipeEditComponent,
     RecipeDetailComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RecipeSearchComponent
   ],
   imports: [
     BrowserModule,
