@@ -1,13 +1,13 @@
 package com.example.springboot;
 import com.example.springboot.Recipe;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -77,6 +77,68 @@ public class MainController {
         recipe_.setTitle(title);
         System.out.println("komme da rein updateFavorite" + recipe_.getFavorite());
         recipeRepository.save(recipe_);
+    }
+
+    @GetMapping("/recipes/filter/{term}/{kind}")
+    public List<Recipe>  filter(@PathVariable String term, @PathVariable String kind){
+        System.out.println("komme da rein filter");
+        List<Recipe> recipe_list_filter =  new ArrayList<Recipe>();;
+        List<Recipe> recipe_list =  new ArrayList<Recipe>();;
+        recipe_list = (List<Recipe>) recipeRepository.findAll();
+        recipe_list.sort((object1, object2) -> object1.getTitle().compareTo(object2.getTitle()));
+
+        if (term.equals("A-Z") && kind.equals("title")) {
+            recipe_list.sort((object1, object2) -> object1.getTitle().compareTo(object2.getTitle()));
+            return recipe_list;
+        }
+        else if (term.equals("Z-A") && kind.equals("title")) {
+            recipe_list.sort((object1, object2) -> object2.getTitle().compareTo(object1.getTitle()));
+            return recipe_list;
+        }
+        else if (term.equals("A-Z") && kind.equals("type")) {
+            recipe_list.sort((object1, object2) -> object1.getType().compareTo(object2.getType()));
+            return recipe_list;
+        }
+        else if (term.equals("Z-A") && kind.equals("type")) {
+            recipe_list.sort((object1, object2) -> object2.getType().compareTo(object1.getType()));
+            return recipe_list;
+        }
+        else if (term.equals("ascending order") && kind.equals("preptime")) {
+            recipe_list.sort((object1, object2) -> object1.getPreparationtime().compareTo(object2.getPreparationtime()));
+            return recipe_list;
+        }
+        else if (term.equals("descending order") && kind.equals("preptime")) {
+            recipe_list.sort((object1, object2) -> object2.getPreparationtime().compareTo(object1.getPreparationtime()));
+            return recipe_list;
+        }
+        else if (term.equals("ascending order") && kind.equals("cooktime")) {
+            recipe_list.sort((object1, object2) -> object1.getCookingtime().compareTo(object2.getCookingtime()));
+            return recipe_list;
+        }
+        else if (term.equals("descending order") && kind.equals("cooktime")) {
+            recipe_list.sort((object1, object2) -> object2.getCookingtime().compareTo(object1.getCookingtime()));
+            return recipe_list;
+        }
+
+        if (!term.isEmpty() && kind.equals("type")) {
+            recipe_list_filter.addAll(recipeRepository.findByType(term));
+            recipe_list_filter.sort((object1, object2) -> object1.getTitle().compareTo(object2.getTitle()));
+            return recipe_list_filter;
+        }
+        if (NumberUtils.isCreatable(term) && kind.equals("preptime")) {
+            int prep_time = Integer.parseInt(term);
+            recipe_list_filter.addAll(recipeRepository.findByPreparationtime(prep_time));
+            recipe_list_filter.sort((object1, object2) -> object1.getTitle().compareTo(object2.getTitle()));
+            return recipe_list_filter;
+        }
+        if (NumberUtils.isCreatable(term) && kind.equals("cooktime")) {
+            int cook_time = Integer.parseInt(term);
+            recipe_list_filter.addAll(recipeRepository.findByCookingtime(cook_time));
+            recipe_list_filter.sort((object1, object2) -> object1.getTitle().compareTo(object2.getTitle()));
+            return recipe_list_filter;
+        }
+
+        return recipe_list;
     }
 
     @GetMapping("/recipes/favorites")

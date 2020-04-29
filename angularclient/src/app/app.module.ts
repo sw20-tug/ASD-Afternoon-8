@@ -19,6 +19,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import {ConfirmDialogService} from './service/recipe-service.service';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.component';
+import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.component';
 
 
 
@@ -31,6 +32,8 @@ import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.co
     RecipeDetailComponent,
     ConfirmDialogComponent,
     RecipeSearchComponent,
+    RecipeFilteringComponent,
+    RecipeSearchComponent,
     RecipeFavoritesComponent
   ],
   imports: [
@@ -40,8 +43,8 @@ import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.co
     FormsModule,
     MatCardModule,
     MatGridListModule,
-    MatButtonModule,
-   MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]
