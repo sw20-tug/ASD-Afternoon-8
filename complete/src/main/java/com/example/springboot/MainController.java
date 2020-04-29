@@ -1,13 +1,13 @@
 package com.example.springboot;
 import com.example.springboot.Recipe;
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -67,11 +67,15 @@ public class MainController {
     }
 
     @PutMapping("/recipes/favorize/{id}")
-    void favorize(@PathVariable int id, @RequestBody Bool favorite) {
-        System.out.println("komme da rein update");
+        void favorize(@PathVariable int id, @RequestBody String title) {
         Recipe recipe_ = recipeRepository.findById(id).get();
-        recipe_.setFavorite(favorite);
-        System.out.println("komme da rein updateTitle");
+        System.out.println("komme da rein update" + id + recipe_.getFavorite());
+        if(recipe_.getFavorite() == true)
+            recipe_.setFavorite(false);
+        else if(recipe_.getFavorite() == false)
+            recipe_.setFavorite(true);
+        recipe_.setTitle(title);
+        System.out.println("komme da rein updateFavorite" + recipe_.getFavorite());
         recipeRepository.save(recipe_);
     }
 
@@ -137,6 +141,14 @@ public class MainController {
         return recipe_list;
     }
 
+    @GetMapping("/recipes/favorites")
+    List<Recipe> favorites() {
+
+        List<Recipe> favorites = recipeRepository.findAllByFavorite(true);
+
+        return favorites;
+    }
+
    @GetMapping("/recipes/search/{title}")
     public List<Recipe>  Search_2(@PathVariable String title ) {
         System.out.println("komme da rein search");
@@ -152,7 +164,7 @@ public class MainController {
        {
            System.out.println("gefunden 2" + title);
 
-           recipe_list.addAll(recipeRepository.findByType(title));
+           recipe_list.addAll(recipeRepository.findByType(title)) ;
        }
 
        if(NumberUtils.isCreatable(title)) {
