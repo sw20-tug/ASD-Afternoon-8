@@ -10,6 +10,13 @@ import { RecipeService } from './service/recipe-service.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogService} from './service/recipe-service.service';
+import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.component';
 
 
 
@@ -18,7 +25,11 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
     AppComponent,
     RecipeListComponent,
     RecipeFormComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    RecipeDetailComponent,
+    ConfirmDialogComponent,
+    RecipeSearchComponent,
+    RecipeFilteringComponent
   ],
   imports: [
     BrowserModule,

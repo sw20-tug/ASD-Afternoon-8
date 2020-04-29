@@ -1,5 +1,7 @@
 package com.example.springboot;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import  javax.validation.constraints.NotNull;
@@ -11,7 +13,7 @@ public class Recipe {
 
 	}
 
-	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty){
+	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty, Bool favorite){
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -20,6 +22,7 @@ public class Recipe {
 		this.cookingtime = cookingtime;
 		this.content = content;
 		this.difficulty = difficulty;
+		this.favorite = favorite;
 	}
 
 	@Id
@@ -47,6 +50,8 @@ public class Recipe {
 	private String content;
 
 	private Integer difficulty;
+
+	private Bool favorite;
 
 
 
@@ -116,4 +121,9 @@ public class Recipe {
 	public void setPreparationtime(Integer preparationtime) {
 		this.preparationtime = preparationtime;
 	}
+
+	public void setFavorite(Bool favorite) {this.favorite = favorite;}
+
+	public Bool getFavorite() {return this.favorite;}
+
 }
