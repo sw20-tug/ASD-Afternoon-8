@@ -42,7 +42,9 @@ import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.co
     HttpClientModule,
     FormsModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]
