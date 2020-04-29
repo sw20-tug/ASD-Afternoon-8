@@ -12,10 +12,13 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './service/recipe-service.service';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.component';
 import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.component';
 
 
@@ -29,7 +32,9 @@ import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.co
     RecipeDetailComponent,
     ConfirmDialogComponent,
     RecipeSearchComponent,
-    RecipeFilteringComponent
+    RecipeFilteringComponent,
+    RecipeSearchComponent,
+    RecipeFavoritesComponent
   ],
   imports: [
     BrowserModule,
