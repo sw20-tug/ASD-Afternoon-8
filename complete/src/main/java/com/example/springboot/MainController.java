@@ -67,12 +67,24 @@ public class MainController {
     }
 
     @PutMapping("/recipes/favorize/{id}")
-    void favorize(@PathVariable int id, @RequestBody Bool favorite) {
-        System.out.println("komme da rein update");
+        void favorize(@PathVariable int id, @RequestBody String title) {
         Recipe recipe_ = recipeRepository.findById(id).get();
-        recipe_.setFavorite(favorite);
-        System.out.println("komme da rein updateTitle");
+        System.out.println("komme da rein update" + id + recipe_.getFavorite());
+        if(recipe_.getFavorite() == true)
+            recipe_.setFavorite(false);
+        else if(recipe_.getFavorite() == false)
+            recipe_.setFavorite(true);
+        recipe_.setTitle(title);
+        System.out.println("komme da rein updateFavorite" + recipe_.getFavorite());
         recipeRepository.save(recipe_);
+    }
+
+    @GetMapping("/recipes/favorites")
+    List<Recipe> favorites() {
+
+        List<Recipe> favorites = recipeRepository.findAllByFavorite(true);
+
+        return favorites;
     }
 
    @GetMapping("/recipes/search/{title}")
@@ -109,16 +121,6 @@ public class MainController {
        }
 
 
-        if(recipe_list.isEmpty())
-            System.out.println("Ist leer");
-
-        return recipe_list;
-
-    }
-    @GetMapping("/recipes/favorites")
-    public List<Recipe>  listFavorites() {
-        System.out.println("komme da rein List");
-        List<Recipe> recipe_list = (List<Recipe>) recipeRepository.findByFavorite(true);
         if(recipe_list.isEmpty())
             System.out.println("Ist leer");
 

@@ -23,6 +23,8 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
     List<Recipe> findByCookingtime(Integer time);
 
+    List<Recipe> findAllByFavorite(Boolean favorite);
+
     boolean existsRecipeById(Integer id);
 
     boolean existsRecipeByTitle(String title);

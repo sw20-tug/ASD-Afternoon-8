@@ -8,6 +8,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
 import { MatIconModule } from '@angular/material/icon'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatButtonModule} from '@angular/material/button';
+//import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -56,6 +58,11 @@ export class RecipeListComponent implements OnInit {
      this.recipeService.updateTitle(id, title)
           .subscribe(() => this.gotoUserList());
    }
+   favorize(id: number, title: string): void {
+      this.recipeService.favorize(id, title)
+           .subscribe(() => this.gotoUserList());
+    }
+
 
    search(search: string): void {
       this.recipeService.findSearch(search)

@@ -15,6 +15,7 @@ export class RecipeService {
   private usersUrl: string;
 
   private searchUrl: string;
+  private  favoritesUrl: string;
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -22,14 +23,27 @@ export class RecipeService {
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/demo/recipes';
     this.searchUrl = 'http://localhost:8080/demo/recipes/search';
+    this.favoritesUrl = 'http://localhost:8080/demo/recipes/favorites';
+
 
   }
 public get(id: string) {
     //return this.http.get<Recipe>(this.usersUrl);
   }
 
+  public favorize(id:number, title:string) : Observable<any>
+  {
+    const url = `${this.usersUrl}/favorize/${id}`;
+    return this.http.put(url, title);
+
+  }
+
   public findAll(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(this.usersUrl);
+  }
+
+  public findFavorites():  Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(this.favoritesUrl);
   }
 
   public findSearch(huhu: string): Observable<Recipe[]> {
