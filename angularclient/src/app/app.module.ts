@@ -19,7 +19,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import {ConfirmDialogService} from './service/recipe-service.service';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.component';
-
+import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.component';
 
 
 @NgModule({
@@ -31,6 +31,8 @@ import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.co
     RecipeDetailComponent,
     ConfirmDialogComponent,
     RecipeSearchComponent,
+    RecipeFilteringComponent,
+    RecipeSearchComponent,
     RecipeFavoritesComponent
   ],
   imports: [
@@ -39,7 +41,10 @@ import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.co
     HttpClientModule,
     FormsModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]
