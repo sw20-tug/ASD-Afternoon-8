@@ -22,7 +22,7 @@ public class Recipe {
 		this.cookingtime = cookingtime;
 		this.content = content;
 		this.difficulty = difficulty;
-		this.favorite = favorite;
+		this.favorite = false;
 	}
 
 	@Id
@@ -51,7 +51,7 @@ public class Recipe {
 
 	private Integer difficulty;
 
-	private Bool favorite;
+	private Boolean favorite = false;
 
 
 
@@ -122,8 +122,8 @@ public class Recipe {
 		this.preparationtime = preparationtime;
 	}
 
-	public void setFavorite(Bool favorite) {this.favorite = favorite;}
+	public void setFavorite(Boolean favorite) {this.favorite = favorite;}
 
-	public Bool getFavorite() {return this.favorite;}
+	public Boolean getFavorite() {return this.favorite;}
 
 }
