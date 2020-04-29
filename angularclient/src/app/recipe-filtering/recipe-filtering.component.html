@@ -1,0 +1,86 @@
+<div id="find-component">
+    <h4><label >recipe Filtering</label></h4>
+    <a>Title:</a>
+    <select  #filterTitle  id="filter-title" (input)="filter(filterTitle.value, 'title')">
+      <option value = ""></option>
+      <optgroup label = "Sort">
+        <option value = "A-Z">A-Z</option>
+        <option value = "Z-A">Z-A</option>
+      </optgroup>
+    </select>
+    <a>Type:</a>
+    <select #filterType id="filter-type" (input)="filter(filterType.value, 'type')" >
+      <option></option>
+      <optgroup label = "Sort">
+          <option value = "A-Z">A-Z</option>
+          <option value = "Z-A">Z-A</option>
+      </optgroup>
+      <optgroup label = "Filter">
+        <option *ngFor="let type of recipes_type_2">{{type}}</option>
+      </optgroup>
+    </select>
+    <a>Preparation time:</a>
+    <select #filterPrepTime id="filter-preptime" (input)="filter(filterPrepTime.value, 'preptime')" >
+      <option></option>
+      <optgroup label = "Sort">
+        <option value="ascending order">ascending order</option>
+        <option value="descending order">descending order</option>
+      </optgroup>
+      <optgroup label = "Filter" >
+        <option *ngFor= "let time of recipes_preptime_2">
+            <a>{{time}}</a>
+        </option>
+      </optgroup>
+    </select>
+    <a>Cooking time:</a>
+     <select #filterCookTime id="filter-cooktime" (input)="filter(filterCookTime.value, 'cooktime')">
+      <option></option>
+      <optgroup label = "Sort">
+        <option value="ascending order">ascending order</option>
+        <option value="descending order">descending order</option>
+      </optgroup>
+      <optgroup label = "Filter">
+        <option *ngFor="let cooktime of recipes_cooktime_2">
+          <a>{{cooktime}}</a>
+        </option>
+      </optgroup>
+    </select>
+
+    <!---<ul class="search-result">
+        <li *ngFor="let recipe of recipes$ | async" >
+            <a routerLink="/detailrecipe/{{recipe.id}}" >
+              {{recipe.title}}
+               </a>
+        </li>
+      </ul>-->
+
+    <mat-grid-list cols="3" rowHeight="1:1.5">
+      <div *ngFor="let recipe of recipes$ | async; let i = index">
+          <h1 *ngIf="i == 0">Filtered Recipes</h1>
+      </div>
+
+        <mat-grid-tile *ngFor="let recipe of recipes$ | async">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title><input [(ngModel)]="recipe.title" placeholder="preparationtime"/> <button (click)="save(recipe.id, recipe.title)">save</button></mat-card-title>
+                  <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                  <p>
+                    <b>Preparation time:</b>{{recipe.preparationtime}}<br>
+                    <b>Cooking time:</b>{{recipe.cookingtime}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button [routerLink]="['/editrecipe', recipe.id]">edit</button>&nbsp;
+                    <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>&nbsp;
+                    <button  class="btn btn-danger" (click)="clickMethod(recipe.id)" aria-label="Delete">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </button>
+            </mat-card-actions>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+  </div>

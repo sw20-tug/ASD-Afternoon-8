@@ -16,6 +16,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './service/recipe-service.service';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
+import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.component';
 
 
 
@@ -27,7 +28,8 @@ import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
     RecipeEditComponent,
     RecipeDetailComponent,
     ConfirmDialogComponent,
-    RecipeSearchComponent
+    RecipeSearchComponent,
+    RecipeFilteringComponent
   ],
   imports: [
     BrowserModule,

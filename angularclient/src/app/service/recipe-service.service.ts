@@ -16,12 +16,15 @@ export class RecipeService {
 
   private searchUrl: string;
 
+  private filterUrl: string;
+
   private headers = new Headers({'Content-Type': 'application/json'});
 
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/demo/recipes';
     this.searchUrl = 'http://localhost:8080/demo/recipes/search';
+    this.filterUrl = 'http://localhost:8080/demo/recipes/filter';
 
   }
 public get(id: string) {
@@ -37,9 +40,20 @@ public get(id: string) {
      // if not search term, return empty hero array.
      return of([]);
    }
+
    return this.http.get<Recipe[]>(`${this.searchUrl}/${huhu}`).pipe(
    );
   }
+
+  public filterTerm(term: string, kind: string): Observable<Recipe[]> {
+    if (!term.trim()) {
+     // if not search term, return empty hero array.
+     return of([]);
+   }
+   return this.http.get<Recipe[]>(`${this.filterUrl}/${term}/${kind}`).pipe(
+   );
+  }
+
 
   getRecipe(id: number): Observable<Recipe> {
   const url = `${this.usersUrl}/edit/${id}`;
