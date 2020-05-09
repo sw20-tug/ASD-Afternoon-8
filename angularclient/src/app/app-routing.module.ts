@@ -5,6 +5,7 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.component';
+import { RecipeStepsComponent } from './recipe-steps/recipe-steps.component';
 
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'addrecipe', component: RecipeFormComponent },
     { path: 'editrecipe/:id', component: RecipeEditComponent },
       { path: 'detailrecipe/:id', component: RecipeDetailComponent },
+      { path: 'recipesteps/:id', component: RecipeStepsComponent },
       { path: 'favoritelist', component: RecipeFavoritesComponent }
 
 

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { RecipeService } from './service/recipe-service.service';
+import { StepsService } from './service/steps-service.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
@@ -20,7 +21,9 @@ import {ConfirmDialogService} from './service/recipe-service.service';
 import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { RecipeFavoritesComponent } from './recipe-favorites/recipe-favorites.component';
 import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.component';
-
+import { RecipeStepsComponent } from './recipe-steps/recipe-steps.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -34,6 +37,7 @@ import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.co
     RecipeSearchComponent,
     RecipeFilteringComponent,
     RecipeSearchComponent,
+    RecipeStepsComponent,
     RecipeFavoritesComponent
   ],
   imports: [
@@ -44,9 +48,11 @@ import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.co
     MatCardModule,
     MatGridListModule,
     MatIconModule,
-    MatButtonModule
+    DragDropModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
-  providers: [RecipeService],
+  providers: [RecipeService, StepsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
