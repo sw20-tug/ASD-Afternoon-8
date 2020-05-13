@@ -1,6 +1,6 @@
 package com.example.springboot;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+//import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +13,7 @@ public class Recipe {
 
 	}
 
-	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty, Bool favorite){
+	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty){
 		this.id = id;
 		this.title = title;
 		this.description = description;
