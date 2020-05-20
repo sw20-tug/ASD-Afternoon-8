@@ -50,7 +50,7 @@ export class RecipeListComponent implements OnInit {
     //sconst id = +this.route.snapshot.paramMap.get('id');
   if(confirm("Are you sure to delete ")) {
          this.recipeService.deleteById(id)
-         .subscribe(() => this.gotoUserList());
+         .subscribe(() => this.refresh());
   }
 }
 

@@ -30,7 +30,6 @@ export class RecipeFilteringComponent implements OnInit {
 
   clickMethod(id: number): void {
     // sconst id = +this.route.snapshot.paramMap.get('id');
-    alert(id);
   if (confirm('Are you sure to delete')) {
          this.recipeService.deleteById(id)
          .subscribe(() => this.refresh());
