@@ -61,6 +61,13 @@
           required #content="ngModel">
         <div [hidden]="!content.pristine" class="alert alert-danger">content is required!</div>
       </div>
+      <div class="form-group">
+        <mat-checkbox [(ngModel)]="recipe.disable_steps"
+          unchecked = "false"
+          class="form-control"
+          id="disable_steps"
+          name="disable_steps"> Disable Step by step guides</mat-checkbox>
+      </div>
       <button type="submit" [disabled]="!recipeForm.form.valid"
         class="btn btn-info">Submit</button>
     </form>

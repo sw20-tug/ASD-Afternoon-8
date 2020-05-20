@@ -13,7 +13,7 @@ public class Recipe {
 
 	}
 
-	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty){
+	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty, Boolean disable_steps){
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -23,6 +23,7 @@ public class Recipe {
 		this.content = content;
 		this.difficulty = difficulty;
 		this.favorite = false;
+		this.disable_steps = disable_steps;
 	}
 
 	@Id
@@ -52,6 +53,8 @@ public class Recipe {
 	private Integer difficulty;
 
 	private Boolean favorite = false;
+
+	private Boolean disable_steps;
 
 
 
@@ -125,5 +128,7 @@ public class Recipe {
 	public void setFavorite(Boolean favorite) {this.favorite = favorite;}
 
 	public Boolean getFavorite() {return this.favorite;}
+
+	public Boolean getDisable_steps() {return this.disable_steps;}
 
 }

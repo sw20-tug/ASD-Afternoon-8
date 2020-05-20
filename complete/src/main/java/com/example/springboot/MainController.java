@@ -183,13 +183,13 @@ public class MainController {
         return recipe_list;
     }
 
-    @GetMapping("/recipes/favorites")
+   /* @GetMapping("/recipes/favorites")
     List<Recipe> favorites() {
 
         List<Recipe> favorites = recipeRepository.findAllByFavorite(true);
 
         return favorites;
-    }
+    }*/
 
    @GetMapping("/recipes/search/{title}")
     public List<Recipe>  Search_2(@PathVariable String title ) {
@@ -244,6 +244,7 @@ public class MainController {
 
     @PostMapping("/recipes")
     void addUser(@RequestBody Recipe recipe) {
+
         System.out.println("komme da rein Add");
         recipeRepository.save(recipe);
     }

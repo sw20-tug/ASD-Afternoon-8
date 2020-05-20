@@ -14,7 +14,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './service/recipe-service.service';
@@ -50,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     DragDropModule,
     MatButtonModule,
+    MatCheckboxModule,
     ReactiveFormsModule
   ],
   providers: [RecipeService, StepsService],
