@@ -14,7 +14,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {ConfirmDialogService} from './service/recipe-service.service';
@@ -24,7 +24,6 @@ import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.co
 import { RecipeStepsComponent } from './recipe-steps/recipe-steps.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
-
 
 @NgModule({
   declarations: [
@@ -47,9 +46,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatCardModule,
     MatGridListModule,
+    MatGridListModule,
     MatIconModule,
     DragDropModule,
     MatButtonModule,
+    MatCheckboxModule,
     ReactiveFormsModule
   ],
   providers: [RecipeService, StepsService],

@@ -1,6 +1,6 @@
 package com.example.springboot;
 import com.example.springboot.Recipe;
-//import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +75,7 @@ public class MainController {
         System.out.println("add Step");
         stepsRepository.save(step);
     }
-    
+
 
 
     @PutMapping("/recipes/edit/{id}")
@@ -183,13 +183,13 @@ public class MainController {
         return recipe_list;
     }
 
-    @GetMapping("/recipes/favorites")
+   /* @GetMapping("/recipes/favorites")
     List<Recipe> favorites() {
 
         List<Recipe> favorites = recipeRepository.findAllByFavorite(true);
 
         return favorites;
-    }
+    }*/
 
    @GetMapping("/recipes/search/{title}")
     public List<Recipe>  Search_2(@PathVariable String title ) {
@@ -231,9 +231,20 @@ public class MainController {
         return recipe_list;
 
     }
+    @GetMapping("/recipes/favorites")
+    public List<Recipe>  listFavorites() {
+        System.out.println("komme da rein List");
+        List<Recipe> recipe_list = (List<Recipe>) recipeRepository.findByFavorite(true);
+        if(recipe_list.isEmpty())
+            System.out.println("Ist leer");
+
+        return recipe_list;
+
+    }
 
     @PostMapping("/recipes")
     void addUser(@RequestBody Recipe recipe) {
+
         System.out.println("komme da rein Add");
         recipeRepository.save(recipe);
     }

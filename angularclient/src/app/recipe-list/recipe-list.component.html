@@ -35,10 +35,12 @@
             <mat-icon>edit</mat-icon> Edit
           </button>&nbsp;
 
-          <button [routerLink]="['/recipesteps', recipe.id]" mat-button>
+          <button [routerLink]="['/recipesteps', recipe.id]" *ngIf="!recipe.disable_steps" mat-button>
             <mat-icon>playlist_add</mat-icon> Steps
           </button>&nbsp;
+          <button *ngIf="recipe.disable_steps" mat-button>
 
+          </button>&nbsp;
           <button [routerLink]="['/detailrecipe', recipe.id]" mat-button>
             <mat-icon>touch_app</mat-icon> Details
           </button>&nbsp;

@@ -22,6 +22,9 @@ export class RecipeFormComponent {
  }
 
  onSubmit() {
+   if (this.recipe.disable_steps === undefined) {
+    this.recipe.disable_steps = false;
+   }
    this.recipeService.save(this.recipe).subscribe(result => this.gotoUserList());
  }
 

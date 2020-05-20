@@ -8,5 +8,5 @@ export class Recipe {
   cookingtime: number;
   content: string;
   difficulty: string;
-
+  disable_steps: boolean;
 }

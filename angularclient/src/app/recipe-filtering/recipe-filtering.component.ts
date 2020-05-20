@@ -41,6 +41,14 @@ export class RecipeFilteringComponent implements OnInit {
          .subscribe(() => this.refresh());
   }
 
+  favorize(id: number, title: string): void {
+    this.recipeService.favorize(id, title)
+         .subscribe(() => this.gotoUserList());
+  }
+  gotoUserList() {
+    this.router.navigate(['/recipelist']);
+  }
+
   // Push a search term into the observable stream.
   filter(term: string, kind: string): void {
     if (term === '') {
