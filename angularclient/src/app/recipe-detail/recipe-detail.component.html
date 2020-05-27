@@ -4,8 +4,15 @@
       <p>
         <img src="https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit" alt="picture" align="right" width="480" height="270">
           <figcaption> Rezept({{recipe.id}}): {{recipe.title}}</figcaption>
-      </figure>
+        <div>
+          <h3>Click the play button to start the onsite cooking mode</h3>
+          <button [routerLink]="['/onsitecooking', recipe.id]" color="primary" mat-icon-button>
+            <mat-icon aria-label="">play_arrow</mat-icon>
+          </button>
+        </div>
+    </figure>
     <div>
+    
   <label><b>description:</b></label>
   <div>
     <input type="text"[(ngModel)]="recipe.description" readonly><br><br>

@@ -92,6 +92,9 @@ export class RecipeStepsComponent implements OnInit {
       element['step_order'] = this.stepsNumber + 1;
       console.log(element);
       this.step = element;
+      if(!this.step.image){
+        this.step.image = "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-stock-vector-no-image-available-icon-flat-vector.jpg?ver=6";
+      }
       this.stepsService.save(this.step).subscribe(result => {
           counter++;
           if(counter == this.productForm.value.stepsArray.length){
