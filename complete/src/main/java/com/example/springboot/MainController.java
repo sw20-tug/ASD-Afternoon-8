@@ -254,4 +254,10 @@ public class MainController {
         System.out.println("komme da rein delete");
         recipeRepository.deleteById(id);
     }
+
+    @DeleteMapping("/steps/delete/{id}")
+    public void deleteStep(@PathVariable int id){
+        System.out.println("komme da rein delete");
+        stepsRepository.deleteById(id);
+    }
 }

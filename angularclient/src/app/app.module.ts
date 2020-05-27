@@ -24,6 +24,8 @@ import { RecipeFilteringComponent } from './recipe-filtering/recipe-filtering.co
 import { RecipeStepsComponent } from './recipe-steps/recipe-steps.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OnsiteCookingComponent } from './onsite-cooking/onsite-cooking.component';
+import {MatListModule} from '@angular/material/list'; 
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecipeFilteringComponent,
     RecipeSearchComponent,
     RecipeStepsComponent,
-    RecipeFavoritesComponent
+    RecipeFavoritesComponent,
+    OnsiteCookingComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DragDropModule,
     MatButtonModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatListModule
   ],
   providers: [RecipeService, StepsService],
   bootstrap: [AppComponent]
