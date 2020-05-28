@@ -1,6 +1,6 @@
 package com.example.springboot;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+//import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +13,7 @@ public class Recipe {
 
 	}
 
-	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty, Bool favorite){
+	public Recipe(Integer id, String title, String description, String type, Integer preparationtime, Integer cookingtime, String content, Integer difficulty, Boolean disable_steps){
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -22,7 +22,8 @@ public class Recipe {
 		this.cookingtime = cookingtime;
 		this.content = content;
 		this.difficulty = difficulty;
-		this.favorite = favorite;
+		this.favorite = false;
+		this.disable_steps = disable_steps;
 	}
 
 	@Id
@@ -51,7 +52,9 @@ public class Recipe {
 
 	private Integer difficulty;
 
-	private Bool favorite;
+	private Boolean favorite = false;
+
+	private Boolean disable_steps;
 
 
 
@@ -122,8 +125,10 @@ public class Recipe {
 		this.preparationtime = preparationtime;
 	}
 
-	public void setFavorite(Bool favorite) {this.favorite = favorite;}
+	public void setFavorite(Boolean favorite) {this.favorite = favorite;}
 
-	public Bool getFavorite() {return this.favorite;}
+	public Boolean getFavorite() {return this.favorite;}
+
+	public Boolean getDisable_steps() {return this.disable_steps;}
 
 }

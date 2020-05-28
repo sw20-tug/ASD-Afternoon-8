@@ -2,15 +2,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 <body>
-    <h1>All recipes</h1>
+
+
+<app-recipe-search></app-recipe-search>
+<app-recipe-filtering></app-recipe-filtering>
+
+<h1>All recipes</h1>
 <mat-grid-list cols="3" rowHeight="1:1.5">
   <mat-grid-tile *ngFor="let recipe of recipes">
     <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title><input [(ngModel)]="recipe.title" placeholder="preparationtime"/> <button (click)="save(recipe.id, recipe.title)">save</button></mat-card-title>
+        <mat-card-title><input [(ngModel)]="recipe.title" placeholder="preparationtime"/> <button (click)="save(recipe.id, recipe.title)">save</button>
+
+
+          <button mat-icon-button color="primary" (click)="favorize(recipe.id, recipe.title)" aria-label="Example icon-button with a heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+           </mat-card-title>
         <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image src="https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit" alt="Photo of a Shiba Inu">
@@ -21,9 +31,19 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-          <button [routerLink]="['/editrecipe', recipe.id]">edit</button>&nbsp;
-          <button [routerLink]="['/detailrecipe', recipe.id]">detail</button>&nbsp;
-        <button  class="glyphicon glyphicon-star"   aria-label="Favourite" ></button>
+          <button [routerLink]="['/editrecipe', recipe.id]" mat-button>
+            <mat-icon>edit</mat-icon> Edit
+          </button>&nbsp;
+
+          <button [routerLink]="['/recipesteps', recipe.id]" *ngIf="!recipe.disable_steps" mat-button>
+            <mat-icon>playlist_add</mat-icon> Steps
+          </button>&nbsp;
+          <button *ngIf="recipe.disable_steps" mat-button>
+
+          </button>&nbsp;
+          <button [routerLink]="['/detailrecipe', recipe.id]" mat-button>
+            <mat-icon>touch_app</mat-icon> Details
+          </button>&nbsp;
           <button  class="btn btn-danger" (click)="clickMethod(recipe.id)" aria-label="Delete">
   <i class="fa fa-trash-o" aria-hidden="true"></i>
 </button>

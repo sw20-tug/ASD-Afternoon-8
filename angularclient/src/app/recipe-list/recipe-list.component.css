@@ -12,7 +12,7 @@
     display: inline-block;
   }
   input{
-  width: 15em;
+  width: 10em;
     height: 2em;
     font-size: 1em;
     padding-left: .4em;
@@ -30,91 +30,15 @@
     background-image: url('https://steemitimages.com/p/2gsjgna1uruvUuS7ndh9YqVwYGPLVszbFLwwpAYXYznNRccWt3nc94HYodrhrewMugmSXwB3yNi3Qs12aevxUiaPoW7SQe7NLt9KJ13ZQqSSDdpjWN?format=match&mode=fit');
     background-size: cover;
   }
-
   .active-pink-2 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #f48fb1;
-  box-shadow: 0 1px 0 0 #f48fb1;
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
   }
-
   .active-pink input[type=text] {
-  border-bottom: 1px solid #f48fb1;
-  box-shadow: 0 1px 0 0 #f48fb1;
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
   }
 
-  .active-purple-2 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #ce93d8;
-  box-shadow: 0 1px 0 0 #ce93d8;
-  }
-
-  .active-purple input[type=text] {
-  border-bottom: 1px solid #ce93d8;
-  box-shadow: 0 1px 0 0 #ce93d8;
-  }
-
-  .active-cyan-2 input[type=text]:focus:not([readonly]) {
-  border-bottom: 1px solid #4dd0e1;
-  box-shadow: 0 1px 0 0 #4dd0e1;
-  }
-
-  .active-cyan input[type=text] {
-  border-bottom: 1px solid #4dd0e1;
-  box-shadow: 0 1px 0 0 #4dd0e1;
-  }
-
-  .active-cyan .fa,
-  .active-cyan-2 .fa {
-  color: #4dd0e1;
-  }
-
-  .active-purple .fa,
-  .active-purple-2 .fa {
-  color: #ce93d8;
-  }
-
-  .active-pink .fa,
-  .active-pink-2 .fa {
-  color: #f48fb1;
-  }
-
-
-label {
-  /* Presentation */
-  font-size: 48px
-}
-
-/* Required Styling */
-
-label input[type="checkbox"] {
-  display: none;
-}
-
-.custom-checkbox {
-  margin-left: 2em;
-  position: relative;
-  cursor: pointer;
-}
-
-.custom-checkbox .glyphicon {
-  color: gold;
-  position: absolute;
-  top: 0.4em;
-  left: -1.25em;
-  font-size: 0.75em;
-}
-
-.custom-checkbox .glyphicon-star-empty {
-  color: gray;
-}
-
-.custom-checkbox .glyphicon-star {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.custom-checkbox:hover .glyphicon-star{
-  opacity: 0.5;
-}
-
-.custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-star {
-  opacity: 1;
-}
+          .active-pink .fa, .active-pink-2 .fa {
+                color: #f48fb1;
+              }
