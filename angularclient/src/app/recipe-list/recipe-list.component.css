@@ -39,6 +39,71 @@
     box-shadow: 0 1px 0 0 #f48fb1;
   }
 
+
+  .active-cyan input[type=text] {
+  border-bottom: 1px solid #4dd0e1;
+  box-shadow: 0 1px 0 0 #4dd0e1;
+  }
+
+  .active-cyan .fa,
+  .active-cyan-2 .fa {
+  color: #4dd0e1;
+  }
+
+  .active-purple .fa,
+  .active-purple-2 .fa {
+  color: #ce93d8;
+  }
+
+  .active-pink .fa,
+  .active-pink-2 .fa {
+  color: #f48fb1;
+  }
+
+
+label {
+  /* Presentation */
+  font-size: 48px
+}
+
+/* Required Styling */
+
+label input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  margin-left: 2em;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox .glyphicon {
+  color: gold;
+  position: absolute;
+  top: 0.4em;
+  left: -1.25em;
+  font-size: 0.75em;
+}
+
+.custom-checkbox .glyphicon-star-empty {
+  color: gray;
+}
+
+.custom-checkbox .glyphicon-star {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.custom-checkbox:hover .glyphicon-star{
+  opacity: 0.5;
+}
+
+.custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-star {
+  opacity: 1;
+}
+
           .active-pink .fa, .active-pink-2 .fa {
                 color: #f48fb1;
               }
+
