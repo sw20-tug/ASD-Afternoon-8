@@ -45,11 +45,9 @@ public class controller {
     @Autowired
     private RecipeRepository recipeRepository;
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 04324cc481210200b4db4ab35c1a789f71dea974
+
     @Test
    public void controller_basic_test() throws Exception {
         System.out.println("Found title:");
@@ -88,7 +86,7 @@ public class controller {
         System.out.println(responseData);
     }
 
-<<<<<<< HEAD
+
     @Test
     public void delete_recipe() throws Exception {
         Recipe recipe_2 = new Recipe();
@@ -118,9 +116,9 @@ public class controller {
 
 
 }
-=======
+
 
 
 
     }
->>>>>>> 04324cc481210200b4db4ab35c1a789f71dea974
+
