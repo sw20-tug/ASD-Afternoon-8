@@ -47,6 +47,7 @@ public class controller {
 
 
 
+
     @Test
    public void controller_basic_test() throws Exception {
         System.out.println("Found title:");
@@ -86,6 +87,38 @@ public class controller {
     }
 
 
+    @Test
+    public void delete_recipe() throws Exception {
+        Recipe recipe_2 = new Recipe();
+        recipe_2.setTitle("Test");
+        recipe_2.setId(2);
+        System.out.println("Found title:" + recipe_2.getId());
+
+
+        System.out.println("Found title:" + recipe_2.getTitle());
+
+
+        MvcResult mvcResult = mockMvc.perform(get("/demo/recipes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(recipe_2))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+        String responseData = mvcResult.getResponse().getContentAsString();
+        mockMvc.perform(get("/demo/recipes/delete/{id}", recipe_2.getId()))
+                .andExpect(status().isOk());
+        MvcResult mvcResult2 = mockMvc.perform(get("/demo/recipes"))
+                .andReturn();
+        String responseData2 = mvcResult2.getResponse().getContentAsString();
+        assertThat(responseData.length()).isNotEqualTo(responseData2.length());
+    }
+
+
+
+
+}
+
+
 
 
     }
+

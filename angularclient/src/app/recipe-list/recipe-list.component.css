@@ -39,6 +39,11 @@
     box-shadow: 0 1px 0 0 #f48fb1;
   }
 
+<<<<<<< HEAD
+          .active-pink .fa, .active-pink-2 .fa {
+                color: #f48fb1;
+              }
+=======
 
   .active-cyan input[type=text] {
   border-bottom: 1px solid #4dd0e1;
@@ -107,3 +112,4 @@ label input[type="checkbox"] {
                 color: #f48fb1;
               }
 
+>>>>>>> 04324cc481210200b4db4ab35c1a789f71dea974
