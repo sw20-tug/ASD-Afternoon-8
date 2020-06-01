@@ -111,14 +111,5 @@ public class controller {
         String responseData2 = mvcResult2.getResponse().getContentAsString();
         assertThat(responseData.length()).isNotEqualTo(responseData2.length());
     }
-
-
-
-
 }
-
-
-
-
-    }
 
