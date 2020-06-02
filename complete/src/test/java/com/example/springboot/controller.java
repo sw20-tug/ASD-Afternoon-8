@@ -27,8 +27,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -94,7 +93,6 @@ public class controller {
         recipe_2.setId(2);
         System.out.println("Found title:" + recipe_2.getId());
 
-
         System.out.println("Found title:" + recipe_2.getTitle());
 
 
@@ -111,5 +109,55 @@ public class controller {
         String responseData2 = mvcResult2.getResponse().getContentAsString();
         assertThat(responseData.length()).isNotEqualTo(responseData2.length());
     }
+
+    @Test
+    public void add_delete_steps() throws Exception {
+        MvcResult response = mockMvc.perform(get("/demo/steps")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        List<Steps> beforeAdd = objectMapper.readValue(
+                response.getResponse().getContentAsString(),
+                objectMapper.getTypeFactory().constructParametricType(List.class, Steps.class)
+        );
+
+
+        Steps step_test = new Steps();
+        step_test.setDescription("test");
+        step_test.setImage("https://img.anime2you.de/2019/06/fullmetal25.jpg");
+        step_test.setStep_order(1);
+
+
+        mockMvc.perform(post("/demo/steps")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(step_test)))
+                .andExpect(status().isOk());
+        MvcResult response1 = mockMvc.perform(get("/demo/steps")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        List<Steps> afterAdd = objectMapper.readValue(
+                response1.getResponse().getContentAsString(),
+                objectMapper.getTypeFactory().constructParametricType(List.class, Steps.class)
+        );
+        assertThat(afterAdd.size()).isEqualTo(beforeAdd.size() + 1);
+
+        mockMvc.perform(
+                delete("/demo/steps/delete/{id}", afterAdd.get(afterAdd.size() - 1).getId()))
+                .andExpect(status().isOk());
+
+        MvcResult response3 = mockMvc.perform(get("/demo/steps")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        List<Steps> afterDelete = objectMapper.readValue(
+                response3.getResponse().getContentAsString(),
+                objectMapper.getTypeFactory().constructParametricType(List.class, Steps.class)
+        );
+
+        assertThat(afterDelete.size()).isEqualTo(afterAdd.size() - 1);
+        assertThat(afterDelete.size()).isEqualTo(beforeAdd.size());
+    }
 }
+
 
