@@ -24,11 +24,20 @@
 <h1>Existing steps for this Recipe</h1>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let step of steps" cdkDrag>
-      {{step.description}} &nbsp;
-      <a target="_blank" href="{{step.image}}">
-        <img src="{{step.image}}" alt="Step">
-      </a>
-      <button class="btn btn-danger" (click)="deleteStep(step.id)">Delete step</button>
+      <div class="recipeImage">
+        {{step.description}} &nbsp;
+      </div>
+      
+      <div>
+        <a target="_blank" href="{{step.image}}">
+          <img src="{{step.image}}" alt="Step">
+        </a>
+      </div>
+      <div>
+        <button class="btn btn-danger" (click)="deleteStep(step.id)">Delete step</button>
+      </div>
+      
+      
     </div> 
 </div>
   
