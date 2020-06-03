@@ -87,27 +87,56 @@ public class controller {
 
 
     @Test
-    public void delete_recipe() throws Exception {
-        Recipe recipe_2 = new Recipe();
-        recipe_2.setTitle("Test");
-        recipe_2.setId(2);
-        System.out.println("Found title:" + recipe_2.getId());
-
-        System.out.println("Found title:" + recipe_2.getTitle());
-
-
-        MvcResult mvcResult = mockMvc.perform(get("/demo/recipes")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(recipe_2))
+    public void add_delete_recipe() throws Exception {
+        MvcResult response = mockMvc.perform(get("/demo/recipes")
                 .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andReturn();
-        String responseData = mvcResult.getResponse().getContentAsString();
-        mockMvc.perform(get("/demo/recipes/delete/{id}", recipe_2.getId()))
+        List<Recipe> beforeAdd = objectMapper.readValue(
+                response.getResponse().getContentAsString(),
+                objectMapper.getTypeFactory().constructParametricType(List.class, Recipe.class)
+        );
+
+        Recipe recipe_2 = new Recipe();
+        recipe_2.setTitle("Test Recipe");
+        recipe_2.setDescription("test");
+        recipe_2.setType("test");
+        recipe_2.setCookingtimeime(1);
+        recipe_2.setPreparationtime(1);
+        recipe_2.setContent("test");
+        recipe_2.setDifficulty(1);
+        recipe_2.setFavorite(false);
+        recipe_2.setDisable_steps(false);
+
+       mockMvc.perform(post("/demo/recipes")
+               .contentType(MediaType.APPLICATION_JSON)
+               .content(objectMapper.writeValueAsString(recipe_2)))
+               .andExpect(status().isOk());
+        MvcResult response1 = mockMvc.perform(get("/demo/recipes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        List<Recipe> afterAdd = objectMapper.readValue(
+                response1.getResponse().getContentAsString(),
+                objectMapper.getTypeFactory().constructParametricType(List.class, Recipe.class)
+        );
+        assertThat(afterAdd.size()).isEqualTo(beforeAdd.size() + 1);
+
+      mockMvc.perform(
+                delete("/demo/recipes/delete/{id}", afterAdd.get(afterAdd.size() - 1).getId()))
                 .andExpect(status().isOk());
-        MvcResult mvcResult2 = mockMvc.perform(get("/demo/recipes"))
+
+        MvcResult response3 = mockMvc.perform(get("/demo/recipes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andReturn();
-        String responseData2 = mvcResult2.getResponse().getContentAsString();
-        assertThat(responseData.length()).isNotEqualTo(responseData2.length());
+      List<Recipe> afterDelete = objectMapper.readValue(
+              response3.getResponse().getContentAsString(),
+                objectMapper.getTypeFactory().constructParametricType(List.class, Recipe.class)
+        );
+
+      assertThat(afterDelete.size()).isEqualTo(afterAdd.size() - 1);
+      assertThat(afterDelete.size()).isEqualTo(beforeAdd.size());
     }
 
     @Test
