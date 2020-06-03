@@ -5,6 +5,7 @@ package com.example.springboot;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import  javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Recipe {
@@ -131,4 +132,27 @@ public class Recipe {
 
 	public Boolean getDisable_steps() {return this.disable_steps;}
 
+	public void setDisable_steps(Boolean disable_steps) {this.disable_steps = disable_steps;}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Recipe)) return false;
+		Recipe recipe = (Recipe) o;
+		return id.equals(recipe.id) &&
+				title.equals(recipe.title) &&
+				description.equals(recipe.description) &&
+				type.equals(recipe.type) &&
+				preparationtime.equals(recipe.preparationtime) &&
+				cookingtime.equals(recipe.cookingtime) &&
+				content.equals(recipe.content) &&
+				difficulty.equals(recipe.difficulty) &&
+				favorite.equals(recipe.favorite) &&
+				disable_steps.equals(recipe.disable_steps);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, title, description, type, preparationtime, cookingtime, content, difficulty, favorite, disable_steps);
+	}
 }
