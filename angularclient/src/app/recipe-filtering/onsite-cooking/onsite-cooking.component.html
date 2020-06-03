@@ -1,0 +1,12 @@
+<mat-list>
+    <mat-list-item>
+      <h2 matLine> {{currentStep?.description}} </h2>
+      <a target="_blank" href="{{currentStep?.image}}">
+        <img src="{{currentStep?.image}}" alt="Step">
+      </a>
+    </mat-list-item>
+    <div>
+        <button class="btn btn-info" (click)="next()" [disabled]="isDisabled">Next</button>
+        <button class="btn btn-danger" [routerLink]="['/recipelist']" [disabled]="isDisabled">Cancel</button>
+    </div>
+</mat-list>

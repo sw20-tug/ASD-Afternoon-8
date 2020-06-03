@@ -16,10 +16,10 @@
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title><input [(ngModel)]="recipe.title" placeholder="preparationtime"/> <button (click)="save(recipe.id, recipe.title)">save</button>
 
-           <pre class="tab">                          <button (click)="favorize(recipe.id, recipe.title)" mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-    </pre>
+
+          <button mat-icon-button color="primary" (click)="favorize(recipe.id, recipe.title)" aria-label="Example icon-button with a heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
            </mat-card-title>
         <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
       </mat-card-header>
@@ -31,13 +31,22 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
+
+
           <button [routerLink]="['/editrecipe', recipe.id]" mat-button>
             <mat-icon>edit</mat-icon> Edit
           </button>&nbsp;
-          
+
+          <button [routerLink]="['/recipesteps', recipe.id]" *ngIf="!recipe.disable_steps" mat-button>
+            <mat-icon>playlist_add</mat-icon> Steps
+          </button>&nbsp;
+          <button *ngIf="recipe.disable_steps" mat-button>
+
+          </button>&nbsp;
           <button [routerLink]="['/detailrecipe', recipe.id]" mat-button>
             <mat-icon>touch_app</mat-icon> Details
           </button>&nbsp;
+
           <button  class="btn btn-danger" (click)="clickMethod(recipe.id)" aria-label="Delete">
   <i class="fa fa-trash-o" aria-hidden="true"></i>
 </button>
