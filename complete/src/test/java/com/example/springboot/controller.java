@@ -1,35 +1,23 @@
 package com.example.springboot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,16 +38,10 @@ public class controller {
 
     @Test
    public void controller_basic_test() throws Exception {
-        System.out.println("Found title:");
         Recipe recipe_2 = new Recipe();
-        System.out.println("Found 2:");
         recipe_2.setTitle("Test");
         recipe_2.setId(2);
         //estEntityManager_2.persistAndFlush(recipe_2);
-        System.out.println("Found title:" + recipe_2.getId());
-
-
-        System.out.println("Found title:" + recipe_2.getTitle());
 
         mockMvc.perform(get("/demo/recipes")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -70,11 +52,6 @@ public class controller {
         Recipe recipe_2 = new Recipe();
         recipe_2.setTitle("Test");
         recipe_2.setId(2);
-        System.out.println("Found title:" + recipe_2.getId());
-
-
-        System.out.println("Found title:" + recipe_2.getTitle());
-
 
         MvcResult mvcResult = mockMvc.perform(get("/demo/recipes")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -92,33 +69,92 @@ public class controller {
         Recipe recipe_2 = new Recipe();
         recipe_2.setTitle("Test");
         recipe_2.setId(2);
-        System.out.println("Found title:" + recipe_2.getId());
 
 
-        System.out.println("Found title:" + recipe_2.getTitle());
-
-
-        MvcResult mvcResult = mockMvc.perform(get("/demo/recipes")
+        MvcResult mvcResult = mockMvc.perform(post("/demo/recipes/")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(recipe_2))
-                .contentType(MediaType.APPLICATION_JSON))
+                .content(objectMapper.writeValueAsString(recipe_2)))
+                .andExpect(status().isOk())
                 .andReturn();
         String responseData = mvcResult.getResponse().getContentAsString();
-        mockMvc.perform(get("/demo/recipes/delete/{id}", recipe_2.getId()))
+
+        MvcResult mvcResult3 = mockMvc.perform(get("/demo/recipes/"))
+                .andExpect(status().isOk())
+                .andReturn();
+;
+        String content = mvcResult3.getResponse().getContentAsString();
+        Integer id = JsonPath.read(content, "[-1].id");//get the last id of the inserted recipes
+
+        mockMvc.perform(delete("/demo/recipes/delete/{id}", id.toString()))
                 .andExpect(status().isOk());
+
         MvcResult mvcResult2 = mockMvc.perform(get("/demo/recipes"))
                 .andReturn();
+
         String responseData2 = mvcResult2.getResponse().getContentAsString();
-        assertThat(responseData.length()).isNotEqualTo(responseData2.length());
+        assertNotEquals(responseData.length(), responseData2.length());
     }
 
 
+    @org.junit.jupiter.api.Test
+    void search_2() throws Exception {
+        Recipe recipe_1 = new Recipe();
+        recipe_1.setTitle("Title1");
+        recipe_1.setContent("Content1");
+        recipe_1.setType("Type 1");
+        recipe_1.setCookingtimeime(15);
+        recipe_1.setPreparationtime(10);
+
+        MvcResult mvcResult1 = mockMvc.perform(post("/demo/recipes/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(recipe_1)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+//        MvcResult mvcResult2 = mockMvc.perform(post("/demo/recipes/")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(recipe_2)))
+//                .andExpect(status().isOk())
+//                .andReturn();
+
+        List<Recipe> response = searchRecipe(recipe_1.getTitle());
+        assertEquals(response.get(response.size() - 1).getTitle(), recipe_1.getTitle());
+
+        response = searchRecipe(recipe_1.getType());
+        assertEquals(response.get(response.size() - 1).getType(), recipe_1.getType());
+
+        response = searchRecipe(recipe_1.getPreparationtime().toString());
+        assertEquals(response.get(response.size() - 1).getPreparationtime(), recipe_1.getPreparationtime());
+
+        response = searchRecipe(recipe_1.getCookingtime().toString());
+        assertEquals(response.get(response.size() - 1).getCookingtime(), recipe_1.getCookingtime());
 
 
+
+        mockMvc.perform(delete("/demo/recipes/delete/{id}", response.get(response.size() - 1).getId()))
+                .andExpect(status().isOk());
+
+
+    }
+
+    private List<Recipe> searchRecipe(String keyword) throws Exception {
+        try {
+            MvcResult mvcResult = mockMvc.perform(get("/demo/recipes/search/{title}", keyword))
+                    .andReturn();
+
+            List<Recipe> afterAdd = objectMapper.readValue(
+                    mvcResult.getResponse().getContentAsString(),
+                    objectMapper.getTypeFactory().constructParametricType(List.class, Recipe.class)
+            );
+
+            return afterAdd;
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong with search." + e.getMessage() + " " + keyword);
+            return null;
+        }
+    }
 }
 
 
-
-
-    }
 

@@ -1,13 +1,12 @@
 package com.example.springboot;
-import com.example.springboot.Recipe;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,10 +22,7 @@ public class MainController {
 
     @GetMapping("/steps")
     public List<Steps> getSteps() {
-        System.out.println("komme da rein List");
         List<Steps> stepsList = (List<Steps>) stepsRepository.findAll();
-        if(stepsList.isEmpty())
-            System.out.println("Ist leer");
 
         return stepsList;
 
@@ -34,10 +30,7 @@ public class MainController {
 
     @GetMapping("/steps/{recipeid}")
     public List<Steps> getStepsById(@PathVariable int recipeid) {
-        System.out.println("komme da rein List");
         List<Steps> stepsList = (List<Steps>) stepsRepository.findByrecipeid(recipeid);
-        if(stepsList.isEmpty())
-            System.out.println("Ist leer");
 
         return stepsList;
 
@@ -45,10 +38,7 @@ public class MainController {
 
     @GetMapping("/recipes")
     public List<Recipe> getRecipes() {
-        System.out.println("komme da rein List");
         List<Recipe> recipe_list = (List<Recipe>) recipeRepository.findAll();
-       if(recipe_list.isEmpty())
-           System.out.println("Ist leer");
 
        return recipe_list;
 
@@ -56,23 +46,18 @@ public class MainController {
 
     @GetMapping("/recipes/edit/{id}")
     public Recipe getRecipe(@PathVariable int id) {
-        System.out.println("komme da rein List huhu");
         return recipeRepository.findById(id).orElse(null);
 
     }
 
     @PutMapping("/steps/reorder/{id}")
     void updateOrder(@PathVariable int id, @RequestBody String newPosition ) {
-        System.out.println("komme da rein update");
         Steps step = stepsRepository.findById(id).get();
         step.setStep_order(Integer.parseInt(newPosition));
-        System.out.println("komme da rein updateOrder");
         stepsRepository.save(step);
     }
     @PostMapping("/steps")
     void addStep(@RequestBody Steps step) {
-        System.out.println(step.getDescription());
-        System.out.println("add Step");
         stepsRepository.save(step);
     }
 
@@ -80,7 +65,6 @@ public class MainController {
 
     @PutMapping("/recipes/edit/{id}")
     void updateRecipe(@PathVariable int id, @RequestBody Recipe recipe ) {
-        System.out.println("komme da rein update");
         Recipe recipe_ = recipeRepository.findById(id).get();
         recipe_.setTitle(recipe.getTitle());
         recipe_.setDescription(recipe.getDescription());
@@ -90,40 +74,30 @@ public class MainController {
         recipe_.setContent(recipe.getContent());
         recipe_.setDifficulty(recipe.getDifficulty());
 
-        System.out.println("komme da rein update");
-        System.out.println("komme da rein update " + recipe.getTitle());
-        System.out.println("komme da rein update" + recipe.getType());
-        System.out.println("komme da rein update" + recipe.getDescription());
-
-
-        System.out.println("komme da rein Add");
         recipeRepository.save(recipe_);
     }
     @PutMapping("/recipes/updateTitle/{id}")
     void updateTitle(@PathVariable int id, @RequestBody String huhu ) {
-        System.out.println("komme da rein update");
         Recipe recipe_ = recipeRepository.findById(id).get();
         recipe_.setTitle(huhu);
-        System.out.println("komme da rein updateTitle");
+
         recipeRepository.save(recipe_);
     }
 
     @PutMapping("/recipes/favorize/{id}")
         void favorize(@PathVariable int id, @RequestBody String title) {
         Recipe recipe_ = recipeRepository.findById(id).get();
-        System.out.println("komme da rein update" + id + recipe_.getFavorite());
         if(recipe_.getFavorite() == true)
             recipe_.setFavorite(false);
         else if(recipe_.getFavorite() == false)
             recipe_.setFavorite(true);
         recipe_.setTitle(title);
-        System.out.println("komme da rein updateFavorite" + recipe_.getFavorite());
+
         recipeRepository.save(recipe_);
     }
 
     @GetMapping("/recipes/filter/{term}/{kind}")
     public List<Recipe>  filter(@PathVariable String term, @PathVariable String kind){
-        System.out.println("komme da rein filter");
         List<Recipe> recipe_list_filter =  new ArrayList<Recipe>();;
         List<Recipe> recipe_list =  new ArrayList<Recipe>();;
         recipe_list = (List<Recipe>) recipeRepository.findAll();
@@ -183,60 +157,38 @@ public class MainController {
         return recipe_list;
     }
 
-   /* @GetMapping("/recipes/favorites")
-    List<Recipe> favorites() {
-
-        List<Recipe> favorites = recipeRepository.findAllByFavorite(true);
-
-        return favorites;
-    }*/
-
    @GetMapping("/recipes/search/{title}")
     public List<Recipe>  Search_2(@PathVariable String title ) {
-        System.out.println("komme da rein search");
-        List<Recipe> recipe_list =  new ArrayList<Recipe>();;
+        HashSet<Recipe> recipe_set = new HashSet<>();
         //int i = Integer.parseInt(title);
-           if(recipeRepository.existsRecipeByTitle(title))
-           {
-           System.out.println("gefunden" + title);
-
-           recipe_list.addAll(recipeRepository.findByTitle(title)) ;
-       }
-       if(recipeRepository.existsRecipeByType(title))
-       {
-           System.out.println("gefunden 2" + title);
-
-           recipe_list.addAll(recipeRepository.findByType(title)) ;
-       }
 
        if(NumberUtils.isCreatable(title)) {
            int prep_cooktime = Integer.parseInt(title);
 
            if (recipeRepository.existsRecipeByPreparationtime(prep_cooktime)) {
-               System.out.println("gefunden 2" + title);
-
-               recipe_list.addAll(recipeRepository.findByPreparationtime(prep_cooktime));
+               recipe_set.addAll(recipeRepository.findByPreparationtime(prep_cooktime));
            }
            if (recipeRepository.existsRecipeByCookingtime(prep_cooktime)) {
-               System.out.println("gefunden 2" + prep_cooktime);
+               recipe_set.addAll(recipeRepository.findByCookingtime(prep_cooktime));
+           }
+       } else{
+           if(recipeRepository.existsRecipeByTitle(title)) {
+               recipe_set.addAll(recipeRepository.findByTitle(title)) ;
+           }
 
-               recipe_list.addAll(recipeRepository.findByCookingtime(prep_cooktime));
+           if(recipeRepository.existsRecipeByType(title)) {
+               recipe_set.addAll(recipeRepository.findByType(title)) ;
            }
        }
 
 
-        if(recipe_list.isEmpty())
-            System.out.println("Ist leer");
-
+       List<Recipe> recipe_list =  new ArrayList<Recipe>(recipe_set);;
         return recipe_list;
 
     }
     @GetMapping("/recipes/favorites")
     public List<Recipe>  listFavorites() {
-        System.out.println("komme da rein List");
         List<Recipe> recipe_list = (List<Recipe>) recipeRepository.findByFavorite(true);
-        if(recipe_list.isEmpty())
-            System.out.println("Ist leer");
 
         return recipe_list;
 
@@ -244,20 +196,16 @@ public class MainController {
 
     @PostMapping("/recipes")
     void addUser(@RequestBody Recipe recipe) {
-
-        System.out.println("komme da rein Add");
         recipeRepository.save(recipe);
     }
 
     @DeleteMapping("/recipes/delete/{id}")
     public void deleteRecipe(@PathVariable int id){
-        System.out.println("komme da rein delete");
         recipeRepository.deleteById(id);
     }
 
     @DeleteMapping("/steps/delete/{id}")
     public void deleteStep(@PathVariable int id){
-        System.out.println("komme da rein delete");
         stepsRepository.deleteById(id);
     }
 }
